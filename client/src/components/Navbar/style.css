@@ -1,0 +1,12 @@
+nav {
+    background-color: darkgreen;
+    color: whitesmoke;
+}
+
+.navbar-brand:hover {
+    font-weight: normal;
+}
+
+.navbar-brand-img {
+    filter: brightness(85%);
+}
