@@ -422,9 +422,8 @@ module.exports = {
                         "symbols": response[0].data
                     }
                 )
-                .then(dbModel => res.send(dbModel))
+                .then(dbModel => res.send(dbModel), console.log("IEX Symbol Update Complete ✔️"))
                 .catch(err => console.log(err))
-
         })
             .catch(err => console.log(err));
     },
@@ -479,7 +478,7 @@ module.exports = {
                                 "rawQuoteData": allResults
                             }
                         )
-                        .then(dbModel => res.send(dbModel))
+                        .then(dbModel => res.send(dbModel), console.log("IEX Quote Update Complete ✔️"))
                         .catch(err => console.log(err))
                 })()
             })
@@ -551,7 +550,7 @@ module.exports = {
                     }
 
                     db.AllPriceTargets.bulkWrite(bulkWriteCommands)
-                        .then(dbModel => res.send(dbModel))
+                        .then(dbModel => res.send(dbModel), console.log("IEX Price Target Updates Complete ✔️"))
                         .catch(err => console.log(err))
                 })()
             })
@@ -690,7 +689,7 @@ module.exports = {
                                         bulkWriteCommands = [];
                                         
                                     };
-                                    console.log("Value search compilation complete, saving to database...");
+                                    console.log("Value search compilation complete, saving to database ✔️");
                                 })
                                 .catch(err => res.status(422).json(err));
                     })

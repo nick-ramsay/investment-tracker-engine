@@ -23,9 +23,30 @@ const Home = () => {
         setCurrentMoment(currentMoment => currentMomentVar);
     }
 
+    const fetchAllIexCloudSymbols = () => {
+        console.log("Called fetchAllIexCloudSymbols...");
+        API.fetchAllIexCloudSymbols().then(res => {
+            console.log(res);
+        });
+    }
+
+    const fetchAllQuotes = () => {
+        console.log("Called fetchAllQuotes...");
+        API.fetchAllQuotes().then(res => {
+            console.log(res);
+        });
+    }
+
     const scrapeAdvancedStats = () => {
         console.log("Called scrapeAdvancedStats...");
         API.scrapeAdvancedStats().then(res => {
+            console.log(res);
+        });
+    }
+
+    const compileValueSearchData = () => {
+        console.log("Called compileValueSearchData...");
+        API.compileValueSearchData().then(res => {
             console.log(res);
         });
     }
@@ -44,7 +65,7 @@ const Home = () => {
                         <h2>{moment(currentMoment).format("dddd, D MMMM YYYY")}</h2>
                     </div>
                     <div className="col-md-12 text-center">
-                        <h2>{moment(currentMoment).format("hh:mm A")}</h2>
+                        <h2>{moment(currentMoment).format("h:mm A")}</h2>
                     </div>
                 </div>
                 <div className="row">
@@ -61,12 +82,23 @@ const Home = () => {
                         <table>
                             <tbody>
                                 <tr>
-                                    <th>Worker</th>
-                                    <th></th>
+                                    <th colSpan="2">Worker</th>
+                                </tr>
+                                <tr>
+                                    <td>Refresh All Available IEX Symbols</td>
+                                    <td><button className="btn btn-sm btn-dark" onClick={() => fetchAllIexCloudSymbols()}>Run</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Fetch All IEX Quotes</td>
+                                    <td><button className="btn btn-sm btn-dark" onClick={() => fetchAllQuotes()}>Run</button></td>
                                 </tr>
                                 <tr>
                                     <td>Scrape Yahoo! Advanced Stats</td>
                                     <td><button className="btn btn-sm btn-dark" onClick={() => scrapeAdvancedStats()}>Run</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Compile Value Search Data</td>
+                                    <td><button className="btn btn-sm btn-dark" onClick={() => compileValueSearchData()}>Run</button></td>
                                 </tr>
                             </tbody>
                         </table>
