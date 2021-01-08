@@ -4,6 +4,11 @@ body {
   font-family: 'Didact Gothic', sans-serif;
 }
 
+table, td, tr, th {
+  border: 1px solid black;
+  padding: 5px;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
