@@ -457,6 +457,7 @@ module.exports = {
                                             valueSearchObject.priceToBook !== null && isNaN(valueSearchObject.priceToBook) === false ? bulkWriteCommand.updateOne.update.priceToBook = valueSearchObject.priceToBook : "";
 
                                             bulkWriteCommands.push(bulkWriteCommand);
+                                            console.log("compileValueSearchData: Bulk Write Command Saved for " + valueSearchObject.symbol + "...");
                                         }
 
 
