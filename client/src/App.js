@@ -6,10 +6,6 @@ import './App.css';
 import Home from './pages/Home/Home';
 import Error from './pages/Error/Error';
 
-import moment from 'moment';
-
-
-
 function App() {
 
     return (

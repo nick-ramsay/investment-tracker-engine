@@ -1,10 +1,10 @@
 {
-  "name": "investment-tracker",
+  "name": "investment-tracker-engine",
   "version": "1.0.0",
   "engines": {
     "node": "12.x"
   },
-  "description": "Application for managing functions, including messages, from various outside applications",
+  "description": "Application hosted locally to automatically maintain Investment Tracker Value Search Data",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nick-ramsay/investment-tracker.git"
+    "url": "git+https://github.com/nick-ramsay/investment-tracker-engine.git"
   },
   "author": "Nick Ramsay",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nick-ramsay/investment-tracker/issues"
+    "url": "https://github.com/nick-ramsay/investment-tracker-engine/issues"
   },
-  "homepage": "https://github.com/nick-ramsay/investment-tracker#readme",
+  "homepage": "https://github.com/nick-ramsay/investment-tracker-engine#readme",
   "dependencies": {
     "@sendgrid/mail": "^7.4.0",
     "axios": "^0.21.0",

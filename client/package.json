@@ -1,5 +1,5 @@
 {
-  "name": "investment-tracker",
+  "name": "investment-tracker-engine",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

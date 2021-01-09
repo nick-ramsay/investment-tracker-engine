@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import moment from "moment";
 import "./style.css";
-import { logout, useInput, getCookie } from "../../sharedFunctions/sharedFunctions";
-import BarLoader from "react-spinners/BarLoader";
+import { useInput } from "../../sharedFunctions/sharedFunctions";
 import NavbarLoggedOut from "../../components/Navbar/Navbar";
 import API from "../../utils/API";
-
-const override = "display: block; margin: 0 auto; border-color: #2F4F4F;";
 
 const Home = () => {
 
     var [currentMoment, setCurrentMoment] = useState(new Date());
-    var [loading, setLoading] = useState(false);
+    //var [loading, setLoading] = useState(false);
 
     let startClock = () => {
         setInterval(clock, 1000);
@@ -19,7 +16,6 @@ const Home = () => {
 
     const clock = () => {
         let currentMomentVar = moment();
-        console.log(currentMoment);
         setCurrentMoment(currentMoment => currentMomentVar);
     }
 
@@ -33,6 +29,13 @@ const Home = () => {
     const fetchAllQuotes = () => {
         console.log("Called fetchAllQuotes...");
         API.fetchAllQuotes().then(res => {
+            console.log(res);
+        });
+    }
+
+    const fetchAllPriceTargets = () => {
+        console.log("Called fetchAllPriceTargets...");
+        API.fetchAllPriceTargets().then(res => {
             console.log(res);
         });
     }
@@ -54,7 +57,7 @@ const Home = () => {
     useEffect(() => {
         console.log("useEffect Called...");
         startClock();
-    }, []) //<-- Empty array makes useEffect run only once...
+    },[]) //<-- Empty array makes useEffect run only once...
 
     return (
         <div>
@@ -72,12 +75,6 @@ const Home = () => {
 
                 </div>
                 <div className="col-md-12 d-flex justify-content-center text-center mt-2">
-                    <BarLoader
-                        css={override}
-                        height={10}
-                        color={"#D4AF37"}
-                        loading={loading}
-                    />
                     <div className="row">
                         <table>
                             <tbody>
@@ -91,6 +88,10 @@ const Home = () => {
                                 <tr>
                                     <td>Fetch All IEX Quotes</td>
                                     <td><button className="btn btn-sm btn-dark" onClick={() => fetchAllQuotes()}>Run</button></td>
+                                </tr>
+                                <tr>
+                                    <td style={{ color: "white", backgroundColor: "red" }}>Fetch All Price Targets</td>
+                                    <td style={{ color: "white", backgroundColor: "red" }}><button className="btn btn-sm btn-warning" onClick={() => fetchAllPriceTargets()}>Run</button></td>
                                 </tr>
                                 <tr>
                                     <td>Scrape Yahoo! Advanced Stats</td>
