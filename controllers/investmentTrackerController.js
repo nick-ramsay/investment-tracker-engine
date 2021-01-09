@@ -192,7 +192,7 @@ module.exports = {
         db.IEXCloudSymbols
             .find({})
             .then(dbModel => {
-                for (let i = 0; i < 5/*dbModel[0].symbols.length*/; i++) {
+                for (let i = 0; dbModel[0].symbols.length; i++) {
                     if (i % 90 === 0 && i !== 0) {
                         allSymbols.push([]);
                         arrayIndex += 1;
@@ -227,7 +227,6 @@ module.exports = {
                                     symbol: result[i].data[j]["price-target"].symbol,
                                     priceTarget: result[i].data[j]["price-target"]
                                 }
-                                //console.log(currentItem);
                                 let bulkWriteCommand = {
                                     updateOne: {
                                         "filter": { "symbol": currentItem.symbol },
@@ -240,6 +239,7 @@ module.exports = {
                                     }
                                 };
                                 bulkWriteCommands.push(bulkWriteCommand);
+                                console.log("Bulk Write Command Saved for " + currentItem.symbol + "...");
                             }
                         }
                     }
@@ -335,7 +335,8 @@ module.exports = {
                 })();
             })
             .catch(err => console.log(err))
-    }, compileValueSearchData: (req, res) => {
+    }, 
+    compileValueSearchData: (req, res) => {
         console.log("Called compileValueSearchData controller...");
         let allIEXData;
         let priceTargetData = [];
