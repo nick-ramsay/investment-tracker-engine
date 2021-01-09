@@ -192,7 +192,7 @@ module.exports = {
         db.IEXCloudSymbols
             .find({})
             .then(dbModel => {
-                for (let i = 0; dbModel[0].symbols.length; i++) {
+                for (let i = 0; i < dbModel[0].symbols.length; i++) {
                     if (i % 90 === 0 && i !== 0) {
                         allSymbols.push([]);
                         arrayIndex += 1;
@@ -205,6 +205,7 @@ module.exports = {
                 for (let i = 0; i < allSymbols.length; i++) {
                     symbolString = "";
                     for (let j = 0; j < allSymbols[i].length; j++) {
+                        console.log("Preparing Price Target Request for " + allSymbols[i][j] + " (#" + j + ")");
                         symbolString += (j !== 0 ? "," : "") + allSymbols[i][j];
                     }
                     apiURLs.push("https://cloud.iexapis.com/stable/stock/market/batch?types=price-target&symbols=" + symbolString + "&token=" + keys.iex_credentials.apiKey);
