@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ValueSearchesSchema = new Schema({
     symbol: { type: String },
-    quote: { type: Object },
+    quote: { type: Object, default: null},
     price: { type: Number, default: null },
     targetPrice: { type: Number, default: null },
     numberOfAnalysts: { type: Number, default: null },

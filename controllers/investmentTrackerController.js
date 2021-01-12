@@ -336,7 +336,7 @@ module.exports = {
                 })();
             })
             .catch(err => console.log(err))
-    }, 
+    },
     compileValueSearchData: (req, res) => {
         console.log("Called compileValueSearchData controller...");
         let allIEXData;
@@ -418,8 +418,8 @@ module.exports = {
 
                                             let valueSearchObject = {
                                                 symbol: `${key}`,
-                                                quote: allIEXData.rawQuoteData[i][currentKey].quote,
-                                                price: allIEXData.rawQuoteData[i][currentKey].quote.latestPrice,
+                                                quote: (allIEXData.rawQuoteData[i][currentKey].quote !== undefined ? allIEXData.rawQuoteData[i][currentKey].quote : null),
+                                                price: (allIEXData.rawQuoteData[i][currentKey].quote.latestPrice !== undefined ? allIEXData.rawQuoteData[i][currentKey].quote.latestPrice : null),
                                                 targetPrice: (currentPriceTargetData !== null ? currentPriceTargetData.priceTarget.priceTargetAverage : null),
                                                 numberOfAnalysts: (currentPriceTargetData !== null ? currentPriceTargetData.priceTarget.numberOfAnalysts : null),
                                                 targetPercentage: (currentPriceTargetData !== null ? Number(allIEXData.rawQuoteData[i][currentKey].quote.latestPrice) / Number(currentPriceTargetData.priceTarget.priceTargetAverage) : null),
