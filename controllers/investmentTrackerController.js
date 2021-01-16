@@ -117,7 +117,7 @@ module.exports = {
                         "symbols": response[0].data
                     }
                 )
-                .then(dbModel => res.send(dbModel), console.log("IEX Symbol Update Complete ✔️"))
+                .then(dbModel => res.json(dbModel), console.log("IEX Symbol Update Complete ✔️"))
                 .catch(err => console.log(err))
         })
             .catch(err => console.log(err));
@@ -478,5 +478,8 @@ module.exports = {
                     .catch(err => console.log(err))
             })
             .catch(err => res.status(422).json(err));
+    },
+    runAllJobs: (req,res) => {
+        console.log("Called runAllJobs controller...");
     }
 }

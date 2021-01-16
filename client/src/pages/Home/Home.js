@@ -54,10 +54,23 @@ const Home = () => {
         });
     }
 
+    const runAllJobs = () => {
+        API.fetchAllIexCloudSymbols().then(res => {
+            console.log(res);
+            API.fetchAllQuotes().then(res => {
+                console.log(res);
+                API.scrapeAdvancedStats().then(res => {
+                    console.log(res);
+                    
+                })
+            });
+        });
+    }
+
     useEffect(() => {
         console.log("useEffect Called...");
         startClock();
-    },[]) //<-- Empty array makes useEffect run only once...
+    }, []) //<-- Empty array makes useEffect run only once...
 
     return (
         <div>
@@ -104,7 +117,11 @@ const Home = () => {
                             </tbody>
                         </table>
                     </div>
+
                 </div>
+            </div>
+            <div className="row mt-2 justify-content-center">
+                <button className="btn btn-sm btn-primary" onClick={() => runAllJobs()}>Run All Jobs</button>
             </div>
         </div>
     )

@@ -25,4 +25,8 @@ router
   .route("/scrape-advanced-stats")
   .post(investmentTrackerController.scrapeAdvancedStats);
 
+router
+  .route("/run-all-jobs")
+  .post(investmentTrackerController.runAllJobs);
+
 module.exports = router;

@@ -26,5 +26,8 @@ export default {
     },
     scrapeAdvancedStats: function () {
         return axios({ method: "post", url: apiURL + "/api/investment-tracker/scrape-advanced-stats", data: {} });
+    },
+    runAllJobs: function () {
+        return axios({ method: "post", url: apiURL + "/api/investment-tracker/run-all-jobs", data: {} });
     }
 };
