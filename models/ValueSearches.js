@@ -15,6 +15,8 @@ const ValueSearchesSchema = new Schema({
     week52Range: { type: Number, default: null },
     debtEquity: { type: Number, default: null},
     priceToBook: { type: Number, default: null},
+    priceToSales: {type: Number, default: null},
+    pegRatio: {type: Number, default: null},
     lastUpdated: { type: Date }
 })
 

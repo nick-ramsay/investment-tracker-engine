@@ -404,6 +404,40 @@ module.exports = {
                                                 currentBookValuePerShareValue = null
                                             }
 
+                                            let currentPriceToSalesIndex;
+                                            let currentPriceToSalesValue;
+
+                                            if (currentAdvanceStatsIndex !== -1) {
+                                                currentPriceToSalesIndex = advancedStatisticsData[currentAdvanceStatsIndex].stats.map((pts) => {
+                                                    return pts.statType;
+                                                }).indexOf("Price/Sales (ttm)")
+                                            } else {
+                                                currentPriceToSalesIndex = -1;
+                                            };
+
+                                            if (currentPriceToSalesIndex !== -1) {
+                                                currentPriceToSalesValue = advancedStatisticsData[currentAdvanceStatsIndex].stats[currentPriceToSalesIndex].statData[0];
+                                            } else {
+                                                currentPriceToSalesValue = null
+                                            }
+
+                                            let currentPEGIndex;
+                                            let currentPEGValue;
+
+                                            if (currentAdvanceStatsIndex !== -1) {
+                                                currentPEGIndex = advancedStatisticsData[currentAdvanceStatsIndex].stats.map((peg) => {
+                                                    return peg.statType;
+                                                }).indexOf("PEG Ratio (5 yr expected) 1")
+                                            } else {
+                                                currentPEGIndex = -1;
+                                            };
+
+                                            if (currentPEGIndex !== -1) {
+                                                currentPEGValue = advancedStatisticsData[currentAdvanceStatsIndex].stats[currentPEGIndex].statData[0];
+                                            } else {
+                                                currentPEGValue = null
+                                            }
+
                                             let currentPriceTargetData;
 
                                             if (currentPriceTargetIndex !== -1) {
@@ -429,7 +463,9 @@ module.exports = {
                                                 exchangeName: allIEXData.symbols[symbolsIndex].exchangeName,
                                                 week52Range: ((allIEXData.rawQuoteData[i][currentKey].quote.latestPrice - allIEXData.rawQuoteData[i][currentKey].quote.week52Low) / (allIEXData.rawQuoteData[i][currentKey].quote.week52High - allIEXData.rawQuoteData[i][currentKey].quote.week52Low) * 100),
                                                 debtEquity: (currentDebtEquityValue !== null && currentDebtEquityValue !== "N/A" ? Number(currentDebtEquityValue / 100) : null),
-                                                priceToBook: (currentBookValuePerShareValue !== null && currentBookValuePerShareValue !== "N/A" ? Number(allIEXData.rawQuoteData[i][currentKey].quote.latestPrice / currentBookValuePerShareValue) : null)
+                                                priceToBook: (currentBookValuePerShareValue !== null && currentBookValuePerShareValue !== "N/A" ? Number(allIEXData.rawQuoteData[i][currentKey].quote.latestPrice / currentBookValuePerShareValue) : null),
+                                                pegRatio: (currentPEGValue !== null && currentPEGValue !== "N/A" ? Number(currentPEGValue) : null),
+                                                priceToSales: (currentPriceToSalesValue !== null && currentPriceToSalesValue !== "N/A" ? Number(currentPriceToSalesValue) : null)
                                             }
 
                                             let bulkWriteCommand = {
@@ -455,6 +491,8 @@ module.exports = {
                                             valueSearchObject.week52Range !== null && isNaN(valueSearchObject.week52Range) === false ? bulkWriteCommand.updateOne.update.week52Range = valueSearchObject.week52Range : "";
                                             valueSearchObject.debtEquity !== null && isNaN(valueSearchObject.debtEquity) === false ? bulkWriteCommand.updateOne.update.debtEquity = valueSearchObject.debtEquity : "";
                                             valueSearchObject.priceToBook !== null && isNaN(valueSearchObject.priceToBook) === false ? bulkWriteCommand.updateOne.update.priceToBook = valueSearchObject.priceToBook : "";
+                                            valueSearchObject.pegRatio !== null && isNaN(valueSearchObject.pegRatio) === false ? bulkWriteCommand.updateOne.update.pegRatio = valueSearchObject.pegRatio : "";
+                                            valueSearchObject.priceToSales !== null && isNaN(valueSearchObject.priceToSales) === false ? bulkWriteCommand.updateOne.update.priceToSales = valueSearchObject.priceToSales : "";
 
                                             bulkWriteCommands.push(bulkWriteCommand);
                                             console.log("compileValueSearchData: Bulk Write Command Saved for " + valueSearchObject.symbol + "...");
